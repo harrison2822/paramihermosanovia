@@ -27,12 +27,15 @@
         }
 
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             color: #ff4d4d;
+            margin-bottom: 30px;
         }
 
-        .buttons {
-            margin-top: 20px;
+        .question-container {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #333;
         }
 
         .btn {
@@ -62,6 +65,9 @@
 
         .hidden {
             display: none;
+        }
+
+        #mensaje {
             font-size: 1.8em;
             color: #d63384;
             font-weight: bold;
@@ -72,24 +78,65 @@
 <body>
 
     <div class="container" id="pregunta">
-        <h1>¿QUIERES SER MI SAN VALENTÍN, MI NUBECITA? 💖🌹</h1>
+        <h1>¡Espera un momento! 🌹</h1>
+        <div class="question-container" id="question-text">¿List@ para unas pequeñas preguntas? Responde con SÍ. 😉</div>
+        <button class="btn btn-yes" onclick="nextQuestion()">SÍ</button>
+        <button class="btn btn-no" disabled>NO 😢</button>
+    </div>
 
-        <div class="buttons">
-            <button class="btn btn-yes" onclick="mostrarMensaje()">¡SÍ! 💘</button>
-            <button class="btn btn-no" disabled>NO 😢</button>
-        </div>
+    <div id="questions" class="hidden">
+        <h1>Responde sinceramente... 💖</h1>
+        <div class="question-container" id="question-text-2"></div>
+        <button class="btn btn-yes" onclick="nextQuestion2()">SÍ</button>
+    </div>
+
+    <div id="finalQuestion" class="hidden">
+        <h1>¿QUIERES SER MI SAN VALENTÍN, MI NUBECITA? 💖🌹</h1>
+        <button class="btn btn-yes" onclick="showMessage()">¡SÍ! 💘</button>
+        <button class="btn btn-no" disabled>NO 😢</button>
     </div>
 
     <div id="mensaje" class="hidden">
         💖 Mi amor por ti no se mide en palabras, pero si pudiera expresarlo en una frase, sería esta:  
         *Eres la razón por la que mi mundo brilla más cada día. No hay estrella en el cielo que ilumine tanto como tu sonrisa, y no hay melodía más hermosa que el latido de mi corazón cuando estás cerca.*  
-        Gracias por ser la persona más especial en mi vida. Este San Valentín será inolvidable contigo. 🌹💕  
+        Gracias por ser la persona más especial en mi vida. Este San Valentín será inolvidable contigo. Te amo mi Fer 🌹💕  
     </div>
 
     <script>
-        function mostrarMensaje() {
-            document.getElementById('pregunta').style.display = 'none';
+        let questionCount = 0;
+
+        const questions = [
+            "¿Crees en el amor a primera vista o debería pasar de nuevo por delante de ti? 😘",
+            "¿Es tu sonrisa más brillante que las estrellas? 🌟",
+            "¿Crees que hay algo más dulce que un abrazo mío? 🤗",
+            "¿Te gustaría recibir rosas de alguien que te adora? 🌹",
+            "¿Te gustaría vivir un San Valentín inolvidable con alguien que piensa en ti cada día? 💖"
+        ];
+
+        function nextQuestion() {
+            questionCount++;
+            if (questionCount < questions.length) {
+                document.getElementById("question-text").innerText = questions[questionCount];
+            } else {
+                document.getElementById("pregunta").style.display = 'none';
+                document.getElementById("questions").style.display = 'none';
+                document.getElementById("finalQuestion").style.display = 'block';
+            }
+        }
+
+        function nextQuestion2() {
+            questionCount++;
+            if (questionCount < questions.length) {
+                document.getElementById("question-text-2").innerText = questions[questionCount];
+            } else {
+                document.getElementById("finalQuestion").style.display = 'block';
+                document.getElementById("questions").style.display = 'none';
+            }
+        }
+
+        function showMessage() {
             document.getElementById('mensaje').style.display = 'block';
+            document.getElementById('finalQuestion').style.display = 'none';
         }
     </script>
 
